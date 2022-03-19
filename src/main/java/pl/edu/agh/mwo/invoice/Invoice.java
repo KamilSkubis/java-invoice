@@ -9,7 +9,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
     private Collection<Product> products;
 
-    public Invoice(){
+    public Invoice() {
         products = new ArrayList<>();
     }
 
@@ -18,22 +18,21 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if(quantity <=0 ){
+        if (quantity <= 0) {
             throw new IllegalArgumentException("quantity cannot be 0");
         }
 
-
-        for(int i=0 ; i<quantity ; i++){
+        for (int i = 0; i < quantity; i++) {
             products.add(product);
         }
     }
 
     public BigDecimal getSubtotal() {
         BigDecimal subtotal = new BigDecimal(0);
-        if(products.size() == 0) {
+        if (products.size() == 0) {
             return subtotal;
         }
-        for(Product product : products){
+        for (Product product : products) {
             subtotal = subtotal.add(product.getPrice());
         }
         return subtotal;
@@ -42,11 +41,11 @@ public class Invoice {
 
     public BigDecimal getTax() {
         BigDecimal tax = BigDecimal.ZERO;
-        if(products.size() == 0) {
+        if (products.size() == 0) {
             return tax;
         }
 
-        for(Product product : products){
+        for (Product product : products) {
             tax = tax.add(product.getPrice().multiply(product.getTaxPercent()));
         }
         return tax;
@@ -54,10 +53,10 @@ public class Invoice {
 
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
-        if(products.size() == 0) {
+        if (products.size() == 0) {
             return total;
         }
-        for(Product product : products){
+        for (Product product : products) {
             total = total.add(product.getPriceWithTax());
         }
         return total;
