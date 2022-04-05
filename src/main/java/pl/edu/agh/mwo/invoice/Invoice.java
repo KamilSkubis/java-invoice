@@ -4,6 +4,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -12,7 +13,7 @@ public class Invoice {
     private int invoiceNumber;
 
     public Invoice(InvoiceRegister.InvoiceToken invoiceToken) {
-        products = new HashMap<Product, Integer>();
+        products = new HashMap<>();
         this.invoiceNumber = invoiceToken.getCurrentInvoiceNumber();
     }
 
@@ -51,5 +52,16 @@ public class Invoice {
 
     public int getInvoiceNumber() {
         return invoiceNumber;
+    }
+
+    public String print() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(invoiceNumber + "\n");
+        products.entrySet().stream().forEach(item -> sb.append(
+                item.getKey().getName() + " " +
+                        item.getValue() +" "+
+                        item.getKey().getPrice().toString() + "\n"));
+        sb.append("Liczba pozycji: " + products.size());
+        return sb.toString();
     }
 }
