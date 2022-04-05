@@ -13,12 +13,16 @@ import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
 import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
 
+import static org.junit.Assert.*;
+
 public class InvoiceTest {
+    private InvoiceRegister reg;
     private Invoice invoice;
 
     @Before
     public void createEmptyInvoiceForTheTest() {
-        invoice = new Invoice();
+        reg = new InvoiceRegister();
+        invoice = reg.createInvoice();
     }
 
     @Test
@@ -125,4 +129,12 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+
+
+    @Test
+    public void invoiceNumberHaveToBePositive(){
+        assertTrue(invoice.getInvoiceNumber() > 0);
+    }
+
 }
