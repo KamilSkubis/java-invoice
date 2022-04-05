@@ -1,19 +1,16 @@
 package pl.edu.agh.mwo.invoice;
 
-import java.math.BigDecimal;
-
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
 import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
 
-import static org.junit.Assert.*;
+import java.math.BigDecimal;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class InvoiceTest {
     private InvoiceRegister reg;
@@ -131,33 +128,33 @@ public class InvoiceTest {
     }
 
     @Test
-    public void invoiceNumberHaveToBePositive(){
+    public void invoiceNumberHaveToBePositive() {
         assertTrue(invoice.getInvoiceNumber() > 0);
     }
 
     @Test
-    public void invoicePrint_FirstLinePrintInvoiceNumber(){
-        assertEquals("1",invoice.print().split("\n")[0]);
+    public void invoicePrint_FirstLinePrintInvoiceNumber() {
+        assertEquals("1", invoice.print().split("\n")[0]);
     }
 
     @Test
-    public void invoicePrint_SecondLineWithProduct(){
-        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")),1);
-        assertEquals("mleko 1 3.24",invoice.print().split("\n")[1]);
+    public void invoicePrint_SecondLineWithProduct() {
+        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")), 1);
+        assertEquals("mleko 1 3.24", invoice.print().split("\n")[1]);
     }
 
     @Test
-    public void invoicePrint_FromSecondLineWithProducts(){
-        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")),1);
-        invoice.addProduct(new OtherProduct("chleb", new BigDecimal("6.45")),4);
-        assertEquals("chleb 4 6.45",invoice.print().split("\n")[2]);
+    public void invoicePrint_FromSecondLineWithProducts() {
+        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")), 1);
+        invoice.addProduct(new OtherProduct("chleb", new BigDecimal("6.45")), 4);
+        assertEquals("chleb 4 6.45", invoice.print().split("\n")[2]);
     }
 
     @Test
-    public void invoicePrint_EndLineSumOfProducts(){
-        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")),1);
-        invoice.addProduct(new OtherProduct("chleb", new BigDecimal("6.45")),4);
-        assertEquals("Liczba pozycji: 2",invoice.print().split("\n")[3]);
+    public void invoicePrint_EndLineSumOfProducts() {
+        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")), 1);
+        invoice.addProduct(new OtherProduct("chleb", new BigDecimal("6.45")), 4);
+        assertEquals("Liczba pozycji: 2", invoice.print().split("\n")[3]);
     }
 
 }
