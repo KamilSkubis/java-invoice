@@ -159,4 +159,22 @@ public class InvoiceTest {
         assertEquals("Liczba pozycji: 2", invoice.print().split("\n")[3]);
     }
 
+
+    @Test
+    public void addingTwoSameProducts_addQuantities(){
+        Product p = new DairyProduct("mleko",new BigDecimal("2.23"));
+        invoice.addProduct(p,1);
+        invoice.addProduct(p,3 );
+        assertEquals(new Integer(4), invoice.getProducts().get(p));
+    }
+
+
+    @Test
+    public void invoicePrint_EndLineReturn1_whenSameProducts() {
+        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")), 1);
+        invoice.addProduct(new DairyProduct("mleko", new BigDecimal("3.24")), 2);
+        assertEquals("Liczba pozycji: 1", invoice.print().split("\n")[2]);
+    }
+
+
 }

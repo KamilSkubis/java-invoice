@@ -25,7 +25,14 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        products.put(product, quantity);
+
+        if(products.containsKey(product)){
+            Integer prevQuantity =  products.get(product);
+            products.put(product,prevQuantity + quantity);
+        }
+        else {
+            products.put(product, quantity);
+        }
     }
 
     public BigDecimal getNetTotal() {
@@ -63,5 +70,9 @@ public class Invoice {
                         item.getKey().getPrice().toString() + "\n"));
         sb.append("Liczba pozycji: " + products.size());
         return sb.toString();
+    }
+
+    public Map<Product, Integer> getProducts() {
+        return products;
     }
 }
