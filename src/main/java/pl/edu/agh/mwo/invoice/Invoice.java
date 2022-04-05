@@ -4,6 +4,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -12,7 +13,7 @@ public class Invoice {
     private int invoiceNumber;
 
     public Invoice(InvoiceRegister.InvoiceToken invoiceToken) {
-        products = new HashMap<>();
+        products = new LinkedHashMap<>();
         this.invoiceNumber = invoiceToken.getCurrentInvoiceNumber();
     }
 
