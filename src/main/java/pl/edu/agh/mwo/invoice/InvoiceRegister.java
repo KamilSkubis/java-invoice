@@ -1,5 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
+import java.time.LocalDate;
+
 public class InvoiceRegister {
 
     private InvoiceToken invoiceToken;
@@ -9,7 +11,7 @@ public class InvoiceRegister {
     }
 
     public Invoice createInvoice() {
-        Invoice invoice = new Invoice(invoiceToken);
+        Invoice invoice = new Invoice(invoiceToken, LocalDate.now());
         invoiceToken.increaseInvoiceNumber();
         return invoice;
     }

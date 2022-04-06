@@ -1,20 +1,24 @@
 package pl.edu.agh.mwo.invoice;
 
+import pl.edu.agh.mwo.invoice.product.FuelCanister;
+import pl.edu.agh.mwo.invoice.product.FuelCanisterZeroTax;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 
 public class Invoice {
+    private final LocalDate invoiceDate;
     private Map<Product, Integer> products;
     private int invoiceNumber;
 
-    public Invoice(InvoiceRegister.InvoiceToken invoiceToken) {
+    public Invoice(InvoiceRegister.InvoiceToken invoiceToken, LocalDate invoiceDate) {
         products = new LinkedHashMap<>();
         this.invoiceNumber = invoiceToken.getCurrentInvoiceNumber();
+        this.invoiceDate = invoiceDate;
     }
 
     public void addProduct(Product product) {
@@ -26,11 +30,15 @@ public class Invoice {
             throw new IllegalArgumentException();
         }
 
-        if(products.containsKey(product)){
-            Integer prevQuantity =  products.get(product);
-            products.put(product,prevQuantity + quantity);
+        if (product instanceof FuelCanister &&
+                new ZeroTaxDay().isZeroTaxDay(invoiceDate)) {
+            product = new FuelCanisterZeroTax(product.getName(), product.getPrice());
         }
-        else {
+
+        if (products.containsKey(product)) {
+            Integer prevQuantity = products.get(product);
+            products.put(product, prevQuantity + quantity);
+        } else {
             products.put(product, quantity);
         }
     }
