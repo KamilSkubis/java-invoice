@@ -15,12 +15,16 @@ public class InvoiceRegister {
         invoiceToken.increaseInvoiceNumber();
         return invoice;
     }
+
+    public InvoiceToken getInvoiceToken(){
+        return invoiceToken;
+    }
     
     public class InvoiceToken {
 
         private int currentInvoiceNumber;
 
-        private InvoiceToken() {
+        public InvoiceToken() {
             currentInvoiceNumber = 1;
         }
 

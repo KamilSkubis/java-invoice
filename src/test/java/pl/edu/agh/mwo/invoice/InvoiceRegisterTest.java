@@ -28,13 +28,13 @@ public class InvoiceRegisterTest {
 
     @Test
     public void invoiceCreatedOnCarpenterDay_fuelTax0() {
-        InvoiceRegister invoiceRegister = new InvoiceRegister();
-        Invoice invoice = invoiceRegister.createInvoice();
+
+        Invoice i = new Invoice(new InvoiceRegister().getInvoiceToken(), LocalDate.of(2000,3,18));
         Product p = new FuelCanister("ON",
                 new BigDecimal("8.00"));
-        invoice.addProduct(p, 1);
+        i.addProduct(p, 1);
 
-        Product product = (Product) invoice.getProducts().keySet().toArray()[0];
+        Product product = (Product) i.getProducts().keySet().toArray()[0];
         assertEquals(new BigDecimal("8.00"), product.getPriceWithTax());
     }
 
