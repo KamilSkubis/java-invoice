@@ -29,9 +29,8 @@ public class InvoiceRegisterTest {
     @Test
     public void invoiceCreatedOnCarpenterDay_fuelTax0() {
 
-        Invoice i = new Invoice(new InvoiceRegister().getInvoiceToken(), LocalDate.of(2000,3,18));
-        Product p = new FuelCanister("ON",
-                new BigDecimal("8.00"));
+        Invoice i = new Invoice(new InvoiceRegister().getInvoiceToken(), LocalDate.of(2000, 3, 18));
+        Product p = new FuelCanister("ON", new BigDecimal("8.00"));
         i.addProduct(p, 1);
 
         Product product = (Product) i.getProducts().keySet().toArray()[0];

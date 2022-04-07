@@ -16,10 +16,10 @@ public class InvoiceRegister {
         return invoice;
     }
 
-    public InvoiceToken getInvoiceToken(){
+    public InvoiceToken getInvoiceToken() {
         return invoiceToken;
     }
-    
+
     public class InvoiceToken {
 
         private int currentInvoiceNumber;

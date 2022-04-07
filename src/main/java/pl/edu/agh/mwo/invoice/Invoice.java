@@ -30,8 +30,7 @@ public class Invoice {
             throw new IllegalArgumentException();
         }
 
-        if (product instanceof FuelCanister &&
-                new ZeroTaxDay().isZeroTaxDay(invoiceDate)) {
+        if (product instanceof FuelCanister && new ZeroTaxDay().isZeroTaxDay(invoiceDate)) {
             product = new FuelCanisterZeroTax(product.getName(), product.getPrice());
         }
 
@@ -72,10 +71,7 @@ public class Invoice {
     public String print() {
         StringBuilder sb = new StringBuilder();
         sb.append(invoiceNumber + "\n");
-        products.entrySet().stream().forEach(item -> sb.append(
-                item.getKey().getName() + " " +
-                        item.getValue() + " " +
-                        item.getKey().getPrice().toString() + "\n"));
+        products.entrySet().stream().forEach(item -> sb.append(item.getKey().getName() + " " + item.getValue() + " " + item.getKey().getPrice().toString() + "\n"));
         sb.append("Liczba pozycji: " + products.size());
         return sb.toString();
     }
